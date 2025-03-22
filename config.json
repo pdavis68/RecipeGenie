@@ -1,0 +1,7 @@
+{
+    "model": "gpt-3.5-turbo",
+    "api_key": "your_api_key_here",
+    "litellm_config": {
+        "timeout": 60
+    }
+}
