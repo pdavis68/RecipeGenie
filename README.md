@@ -1,5 +1,7 @@
 # Recipe Genie 🧞‍♂️👨‍🍳
 
+In a rut? Can't think of something make? Roll the dice with AI.
+
 Recipe Genie is an AI-powered recipe generator that creates personalized recipes based on your preferences. Simply specify your desired cuisine, main ingredient, calorie target, and other parameters, and Recipe Genie will craft a delicious recipe tailored to your needs.
 
 ![Recipe Genie Screenshot](screenshots/main_screen.png)
