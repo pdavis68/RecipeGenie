@@ -40,10 +40,14 @@ class RecipeApp:
         form_frame = ttk.Frame(self.root, padding="20")
         form_frame.pack(fill=tk.BOTH, expand=True)
         
+        # Store references to input widgets for enabling/disabling
+        self.input_widgets = []
+        
         # Cuisine selection
         ttk.Label(form_frame, text="Cuisine:").grid(column=0, row=0, sticky=tk.W, pady=5)
         self.cuisine_var = tk.StringVar()
         self.cuisine_combo = ttk.Combobox(form_frame, textvariable=self.cuisine_var, width=30)
+        self.input_widgets.append(self.cuisine_combo)
         self.cuisine_combo['values'] = [
             "American", "Argentinian", "Australian", "Brazilian", "British", "Cajun", "Caribbean", 
             "Chinese", "Cantonese", "Szechuan", "Hunan", "Creole/Cajun", "Cuban", "Dutch", "Estonian",
@@ -61,31 +65,41 @@ class RecipeApp:
         # Main ingredient
         ttk.Label(form_frame, text="Main Ingredient:").grid(column=0, row=1, sticky=tk.W, pady=5)
         self.centerpiece_var = tk.StringVar()
-        ttk.Entry(form_frame, textvariable=self.centerpiece_var, width=30).grid(column=1, row=1, sticky=(tk.W, tk.E), pady=5)
+        centerpiece_entry = ttk.Entry(form_frame, textvariable=self.centerpiece_var, width=30)
+        centerpiece_entry.grid(column=1, row=1, sticky=(tk.W, tk.E), pady=5)
+        self.input_widgets.append(centerpiece_entry)
         
         # Calories
         ttk.Label(form_frame, text="Calories per Serving:").grid(column=0, row=2, sticky=tk.W, pady=5)
         self.calories_var = tk.StringVar(value="500")
-        ttk.Entry(form_frame, textvariable=self.calories_var, width=30).grid(column=1, row=2, sticky=(tk.W, tk.E), pady=5)
+        calories_entry = ttk.Entry(form_frame, textvariable=self.calories_var, width=30)
+        calories_entry.grid(column=1, row=2, sticky=(tk.W, tk.E), pady=5)
+        self.input_widgets.append(calories_entry)
         
         # Servings
         ttk.Label(form_frame, text="Number of Servings:").grid(column=0, row=3, sticky=tk.W, pady=5)
         self.servings_var = tk.StringVar(value="4")
-        ttk.Entry(form_frame, textvariable=self.servings_var, width=30).grid(column=1, row=3, sticky=(tk.W, tk.E), pady=5)
+        servings_entry = ttk.Entry(form_frame, textvariable=self.servings_var, width=30)
+        servings_entry.grid(column=1, row=3, sticky=(tk.W, tk.E), pady=5)
+        self.input_widgets.append(servings_entry)
         
         # Maximum Prep Time
         ttk.Label(form_frame, text="Maximum Prep Time (minutes):").grid(column=0, row=4, sticky=tk.W, pady=5)
         self.prep_time_var = tk.StringVar(value="30")
-        ttk.Entry(form_frame, textvariable=self.prep_time_var, width=30).grid(column=1, row=4, sticky=(tk.W, tk.E), pady=5)
+        prep_time_entry = ttk.Entry(form_frame, textvariable=self.prep_time_var, width=30)
+        prep_time_entry.grid(column=1, row=4, sticky=(tk.W, tk.E), pady=5)
+        self.input_widgets.append(prep_time_entry)
         
         # Additional information
         ttk.Label(form_frame, text="Additional Information:").grid(column=0, row=5, sticky=tk.W, pady=5)
         self.additional_info_text = scrolledtext.ScrolledText(form_frame, width=40, height=6, wrap=tk.WORD)  # Reduced height
         self.additional_info_text.grid(column=0, row=6, columnspan=2, sticky=(tk.W, tk.E), pady=5)
+        self.input_widgets.append(self.additional_info_text)
         
         # Generate button
-        generate_button = ttk.Button(form_frame, text="Generate Recipe", command=self.generate_recipe)
-        generate_button.grid(column=0, row=7, columnspan=2, pady=10)  # Reduced padding
+        self.generate_button = ttk.Button(form_frame, text="Generate Recipe", command=self.generate_recipe)
+        self.generate_button.grid(column=0, row=7, columnspan=2, pady=10)  # Reduced padding
+        self.input_widgets.append(self.generate_button)
         
         # Configure grid weights
         form_frame.columnconfigure(1, weight=1)
@@ -180,9 +194,8 @@ class RecipeApp:
             messagebox.showerror("Error", "Calories, servings, and prep time must be numbers.")
             return
         
-        # Show loading indicator
-        self.root.config(cursor="watch")  # Use "watch" (hourglass) instead of "wait"
-        self.root.update()
+        # Show loading indicator and disable controls
+        self.set_busy_state(True)
         
         try:
             # Generate recipe
@@ -216,8 +229,8 @@ class RecipeApp:
             log_error(error_message, traceback.format_exc())
             messagebox.showerror("Error", error_message)
         finally:
-            # Reset cursor
-            self.root.config(cursor="")  # Reset to default cursor
+            # Reset cursor and re-enable controls
+            self.set_busy_state(False)
     
     def format_recipe_text(self, recipe_data):
         """Format the recipe data as readable text"""
@@ -258,6 +271,44 @@ class RecipeApp:
             messagebox.showinfo("Success", "Recipe copied to clipboard!")
         except Exception as e:
             messagebox.showerror("Error", f"Failed to copy to clipboard: {str(e)}")
+    
+    def set_busy_state(self, is_busy):
+        """Set the busy state of the application
+        
+        Args:
+            is_busy (bool): True to show busy cursor and disable controls, False to restore normal state
+        """
+        if is_busy:
+            # Set busy cursor for all widgets
+            self.root.config(cursor="watch")
+            for widget in self.root.winfo_children():
+                widget.config(cursor="watch")
+            
+            # Disable all input widgets
+            for widget in self.input_widgets:
+                if isinstance(widget, ttk.Button):
+                    widget.state(['disabled'])
+                elif isinstance(widget, scrolledtext.ScrolledText):
+                    widget.config(state=tk.DISABLED)
+                else:
+                    widget.config(state="disabled")
+        else:
+            # Reset cursor for all widgets
+            self.root.config(cursor="")
+            for widget in self.root.winfo_children():
+                widget.config(cursor="")
+            
+            # Re-enable all input widgets
+            for widget in self.input_widgets:
+                if isinstance(widget, ttk.Button):
+                    widget.state(['!disabled'])
+                elif isinstance(widget, scrolledtext.ScrolledText):
+                    widget.config(state=tk.NORMAL)
+                else:
+                    widget.config(state="normal")
+        
+        # Force update to show changes immediately
+        self.root.update()
     
     def export_recipe(self, recipe_data, formatted_text):
         """Export the recipe to a text file"""
