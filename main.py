@@ -45,9 +45,9 @@ class RecipeApp:
         self.cuisine_var = tk.StringVar()
         self.cuisine_combo = ttk.Combobox(form_frame, textvariable=self.cuisine_var, width=30)
         self.cuisine_combo['values'] = [
-            "American", "Argentinian", "Australian", "Brazilian", "British", "Cajun",
-            "Caribbean", "Chinese", "Cantonese", "Szechuan", "Hunan", "Creole/Cajun", "Cuban", 
-            "Ethiopian", "Filipino", "French", "Fusion", "German", "Greek", "Hawaiian", "Indian", 
+            "American", "Argentinian", "Australian", "Brazilian", "British", "Cajun", "Caribbean", 
+            "Chinese", "Cantonese", "Szechuan", "Hunan", "Creole/Cajun", "Cuban", "Dutch", "Estonian",
+            "Ethiopian", "Filipino", "Finnish" "French", "Fusion", "German", "Greek", "Hawaiian", "Indian", 
             "Northern India", "Southern India", "Eastern India", "Western India", "Indonesian", "Irish",
             "Italian", "Northern Italian", "Central Italian", "Southern Italian", "Jamaican", 
             "Japanese", "Korean", "Lebanese", "Malaysian", "Mediterranean", 
