@@ -49,16 +49,20 @@ class RecipeApp:
         self.cuisine_combo = ttk.Combobox(form_frame, textvariable=self.cuisine_var, width=30)
         self.input_widgets.append(self.cuisine_combo)
         self.cuisine_combo['values'] = [
-            "American", "Argentinian", "Australian", "Brazilian", "British", "Cajun", "Caribbean", 
-            "Chinese", "Cantonese", "Szechuan", "Hunan", "Creole/Cajun", "Cuban", "Dutch", "Estonian",
-            "Ethiopian", "Filipino", "Finnish" "French", "Fusion", "German", "Greek", "Hawaiian", "Indian", 
-            "Northern India", "Southern India", "Eastern India", "Western India", "Indonesian", "Irish",
-            "Italian", "Northern Italian", "Central Italian", "Southern Italian", "Jamaican", 
-            "Japanese", "Korean", "Lebanese", "Malaysian", "Mediterranean", 
-            "Mexican (authentic)", "Middle Eastern", "Moroccan", "New England", "New Zealand", 
-            "Peruvian", "Polish", "Russian", "Sardinian", "Scandinavian", "Sicilian", "South African",
-            "Southern US", "Southwestern US", "Soul Food", "Spanish", "Taiwanese",
-            "Tex Mex", "Thai", "Northern Thai", "Central Thai", "Southern Thai", "Turkish", "Vietnamese"
+            "American", "American (Cajun)", "American (California Style)", "American (Creole)", 
+            "American (Hawaiian)", "American (Midwestern)",  "American (New England)", "American (Pacific Northwest)", 
+            "American (Soul Food)", "American (Southern)",  "American (Southwestern)", "American (Tex-Mex)", 
+            "Argentinian", "Australian", "Brazilian", "British", "Caribbean", "Chinese", "Chinese (Cantonese)", 
+            "Chinese (Szechuan)", "Chinese (Hunan)",  "Cuban", "Dutch", "Estonian", "Ethiopian", "Filipino", "Finnish" 
+            "French", "Fusion", "German",  "Greek", "Indian", "Indian (Northern)", "Indian (Southern)", "Indian (Eastern)", 
+            "Indian (Western)", "Indonesian", "Irish", "Italian", "Italian (Northern)", "Italian (Central)", 
+            "Italian (Southern)", "Jamaican", "Japanese", "Korean", "Lebanese", "Malaysian", "Mediterranean", 
+            "Mexican (authentic)", "Mexican (Oaxacan)", "Mexican (Michoacan)", "Mexican (Yucatan)",
+            "Mexican (Vera Cruz)", "Mexican (Puebla)", "Mexican (Jalisco)", "Mexican (Chiapas)", 
+            "Mexican (Guerrero)", "Mexican (Northern)", "Middle Eastern", "Moroccan", "New England", 
+            "New Zealand", "Peruvian", "Polish", "Russian", "Sardinian", "Scandinavian", "Sicilian", 
+            "South African", "Spanish", "Taiwanese","Thai", "Thai (Northern)", "Thai (Central)", "Thai (Southern)", 
+            "Turkish", "Vietnamese"
         ]
         self.cuisine_combo.grid(column=1, row=0, sticky=(tk.W, tk.E), pady=5)
         
