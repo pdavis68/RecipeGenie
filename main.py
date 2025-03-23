@@ -294,6 +294,8 @@ class RecipeApp:
                     widget.state(['disabled'])
                 elif isinstance(widget, scrolledtext.ScrolledText):
                     widget.config(state=tk.DISABLED)
+                    # Apply a disabled-looking background color to make it visually appear disabled
+                    widget.config(background="#F0F0F0")  # Light gray background
                 else:
                     widget.config(state="disabled")
         else:
@@ -308,6 +310,8 @@ class RecipeApp:
                     widget.state(['!disabled'])
                 elif isinstance(widget, scrolledtext.ScrolledText):
                     widget.config(state=tk.NORMAL)
+                    # Restore the normal background color
+                    widget.config(background="white")
                 else:
                     widget.config(state="normal")
         
