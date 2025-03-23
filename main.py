@@ -53,7 +53,7 @@ class RecipeApp:
             "American (Hawaiian)", "American (Midwestern)",  "American (New England)", "American (Pacific Northwest)", 
             "American (Soul Food)", "American (Southern)",  "American (Southwestern)", "American (Tex-Mex)", 
             "Argentinian", "Australian", "Brazilian", "British", "Caribbean", "Chinese", "Chinese (Cantonese)", 
-            "Chinese (Szechuan)", "Chinese (Hunan)",  "Cuban", "Dutch", "Estonian", "Ethiopian", "Filipino", "Finnish" 
+            "Chinese (Szechuan)", "Chinese (Hunan)",  "Cuban", "Dutch", "Estonian", "Ethiopian", "Filipino", "Finnish", 
             "French", "Fusion", "German",  "Greek", "Indian", "Indian (Northern)", "Indian (Southern)", "Indian (Eastern)", 
             "Indian (Western)", "Indonesian", "Irish", "Italian", "Italian (Northern)", "Italian (Central)", 
             "Italian (Southern)", "Jamaican", "Japanese", "Korean", "Lebanese", "Malaysian", "Mediterranean", 
